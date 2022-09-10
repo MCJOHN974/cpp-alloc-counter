@@ -54,10 +54,36 @@ def test2() -> None:
 
     Assert2('A', [1, 0, 0])
     Assert2('B', [0, 2, 0])
-    Assert2('C', [0, 2, 0])    
+    Assert2('C', [0, 2, 0])
+
+
+# many-files
+def test3() -> None:
+    creations = ClassList(Codelines("test/many-files")).CountCreations()
+
+    def Assert3(obj, exp):
+        Assert('many-files', creations, obj, exp)
+
+
+    Assert3('A', [0, 2, 0])
+    Assert3('B', [0, 2, 0])
+    Assert3('C', [1, 0, 0])    
+
+
+# references
+def test4() -> None:
+    creations = ClassList(Codelines("test/references")).CountCreations()
+
+    def Assert3(obj, exp):
+        Assert('references', creations, obj, exp)
+
+
+    Assert3('A', [0, 1, 0])   
 
 
 if __name__ == '__main__':
     test1()
     test2()
+    test3()
+    test4()
     Results()
