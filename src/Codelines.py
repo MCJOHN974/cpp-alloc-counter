@@ -5,7 +5,7 @@ class Codelines:
     def __init__(self, dir : str) -> None:
         self.__lines = []
         for file in os.listdir(dir):
-            with open(file, "r") as f:
+            with open(dir + '/' + file, "r") as f:
                 self.__lines += f.readlines()
 
 

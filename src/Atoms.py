@@ -13,7 +13,7 @@ class Atoms:
 
 
     def __init__(self, codeline : str) -> None:
-        self.__atoms = self.__GenerateAtoms(codeline.replace('{', '').replace('}', ''))
+        self.__atoms = self.__GenerateAtoms(codeline.replace('{', '').replace('}', '').replace(';', ''))
 
 
     def __GenerateAtoms(self, codeline : str) -> list:
@@ -21,9 +21,21 @@ class Atoms:
             if codeline[i] in self.__special_characters:
                 return self.__GenerateAtoms(codeline[:i]) + self.__GenerateAtoms(codeline[i + 1:])
             if codeline[i] == '(':
-                j = self.__FindClose(i)
+                j = self.__FindClose(codeline, i)
                 return self.__GenerateAtoms(codeline[:i] + codeline[j + 1:]) + self.__GenerateAtoms(codeline[i+1:j])
         return [codeline]
+
+
+    def __FindClose(self, codeline : str, open : int) -> int:
+        opened = 1
+        close = open
+        while opened != 0:
+            close += 1
+            if codeline[close] == '(':
+                opened += 1
+            if codeline[close] == ')':
+                opened -= 1
+        return close
 
 
     class Iterator:

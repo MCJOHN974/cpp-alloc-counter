@@ -15,14 +15,14 @@ class ClassList:
         self.__classes = set()
         line = self.__codelines.Begin()
         while not line.IsEnd():
-            if line.Value()[:5] == "class":
+            if line.Code()[:5] == "class":
                 self.__classes.add(line.Code()[6:line.Code().find(' ', 6)])
             line.Next()
 
 
     # returns a dict where key = name of class, value = list of three integers --
     # number of heap stack and static objects created
-    def CountCreations(self) -> dict:
+    def __CountCreations(self) -> dict:
         res = dict()
         for className in self.__classes:
             res[className] = [0, 0, 0]
@@ -41,18 +41,26 @@ class ClassList:
                             res[objclass][2] += 1
                     atom.Next()
             line.Next()
+        return res
+
+
+    def PrintReport(self) -> None:
+        creations = self.__CountCreations()
+        print("Class", "Heap", "Stack", "Static", sep='\t')
+        for obj in creations:
+            print(obj, creations[obj][0], creations[obj][1], creations[obj][2], sep='\t')
 
 
     # here code can be both codeline or atom
     def __HasObjectCreation(self, code : str) -> bool:
         for className in self.__classes:
-            if className in code:
+            if className in code and 'class' not in code:
                 return True
         return False
 
 
     # here code can be ONLY an atom
-    def __WhichCreation(self, code : str) -> tuple[Method, str]:
+    def __WhichCreation(self, code : str) -> tuple((Method, str)):
         objectClass = ""
         for className in self.__classes:
             if className in code:

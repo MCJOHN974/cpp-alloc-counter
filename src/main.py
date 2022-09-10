@@ -1,6 +1,6 @@
 from ClassList import ClassList
 from Codelines import Codelines
+import sys
 
 
-dir = "test"
-print(ClassList(Codelines(dir)).CountCreations())
+ClassList(Codelines(sys.argv[1])).PrintReport()
