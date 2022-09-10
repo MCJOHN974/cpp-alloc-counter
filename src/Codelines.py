@@ -1,24 +1,32 @@
+import os
+
+
 class Codelines:
     def __init__(self, dir : str) -> None:
-        pass
+        self.__lines = []
+        for file in os.listdir(dir):
+            with open(file, "r") as f:
+                self.__lines += f.readlines()
 
 
     class Iterator:
-        def __init__(self) -> None:
-            pass
+        def __init__(self, lst : list, len : int, pos : int) -> None:
+            self.__lst = lst
+            self.__len = len
+            self.__pos = pos
 
 
         def Next(self) -> None:
-            pass
+            self.__pos += 1
 
 
         def Code(self) -> str:
-            pass
+            return self.__lst[self.__pos]
 
 
         def IsEnd(self) -> bool:
-            pass
+            return self.__pos >= self.__len
 
 
     def Begin(self) -> Iterator:
-        pass
+        return self.Iterator(self.__lines, len(self.__lines), 0)
