@@ -17,7 +17,6 @@ class Codelines:
         for file in os.listdir(dir):
             with open(dir + '/' + file, "r") as f:
                 self.__lines += [RemoveScope(line) for line in f.readlines() if line[0] != '#']
-        print(*self.__lines, sep='\n')
 
 
     class Iterator:
