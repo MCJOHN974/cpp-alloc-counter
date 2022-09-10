@@ -6,7 +6,7 @@ class Codelines:
         self.__lines = []
         for file in os.listdir(dir):
             with open(dir + '/' + file, "r") as f:
-                self.__lines += f.readlines()
+                self.__lines += [line for line in f.readlines() if line[0] != '#']
 
 
     class Iterator:
