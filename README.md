@@ -20,3 +20,9 @@ B       0       2       0
 C       1       1       0
 AAA     1       0       1
 ```
+
+## Testing
+To test it run 
+```
+python3 src/test.py
+```
