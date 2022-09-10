@@ -22,7 +22,7 @@ class ClassList:
 
     # returns a dict where key = name of class, value = list of three integers --
     # number of heap stack and static objects created
-    def __CountCreations(self) -> dict:
+    def CountCreations(self) -> dict:
         res = dict()
         for className in self.__classes:
             res[className] = [0, 0, 0]
@@ -45,7 +45,7 @@ class ClassList:
 
 
     def PrintReport(self) -> None:
-        creations = self.__CountCreations()
+        creations = self.CountCreations()
         print("Class", "Heap", "Stack", "Static", sep='\t')
         for obj in creations:
             print(obj, creations[obj][0], creations[obj][1], creations[obj][2], sep='\t')
