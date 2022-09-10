@@ -14,6 +14,7 @@ class Atoms:
 
     def __init__(self, codeline : str) -> None:
         self.__atoms = self.__GenerateAtoms(codeline.replace('{', '').replace('}', '').replace(';', ''))
+        print(*self.__atoms, sep='\n')
 
 
     def __GenerateAtoms(self, codeline : str) -> list:

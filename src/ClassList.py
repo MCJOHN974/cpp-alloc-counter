@@ -16,7 +16,8 @@ class ClassList:
         line = self.__codelines.Begin()
         while not line.IsEnd():
             if line.Code()[:5] == "class":
-                self.__classes.add(line.Code()[6:line.Code().find(' ', 6)])
+                for char in ('', '*', '&'):
+                    self.__classes.add(line.Code()[6:line.Code().find(' ', 6)] + char)
             line.Next()
 
 
