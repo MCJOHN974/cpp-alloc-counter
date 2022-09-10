@@ -1,6 +1,7 @@
 from ClassList import ClassList
 from Codelines import Codelines
 from colorama import Fore, Back, Style
+import sys
 
 
 OK = 0
@@ -87,3 +88,4 @@ if __name__ == '__main__':
     test3()
     test4()
     Results()
+    sys.exit(FAIL)
