@@ -12,12 +12,15 @@ class Method(Enum):
 class ClassList:
     def __init__(self, codelines : Codelines) -> None:
         self.__codelines = codelines
-        self.__classes = set()
+        # TBD: change to binary tree
+        self.__classes = []
         line = self.__codelines.Begin()
         while not line.IsEnd():
             if line.Code()[:5] == "class":
-                self.__classes.add(line.Code()[6:line.Code().find(' ', 6)])
+                for char in ('', '*', '&'):
+                    self.__classes.append((line.Code()[6:line.Code().find(' ', 6)] + char))
             line.Next()
+        self.__classes.sort(key = lambda x: (-1 * len(x), x))
 
 
     # returns a dict where key = name of class, value = list of three integers --
@@ -41,7 +44,11 @@ class ClassList:
                             res[objclass][2] += 1
                     atom.Next()
             line.Next()
-        return res
+        rres = {}
+        for key in res:
+            if key[-1] != '*' and key[-1] != '&':
+                rres[key] = res[key]
+        return rres
 
 
     def PrintReport(self) -> None:
@@ -67,7 +74,7 @@ class ClassList:
                 objectClass = className
                 break
         if "new" in code:
-            return (Method.HEAP, objectClass)
+            return (Method.HEAP, objectClass[:-1])
         if "static" in code:
             return (Method.STATIC, objectClass)
         return (Method.STACK, objectClass)
