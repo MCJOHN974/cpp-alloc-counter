@@ -6,7 +6,7 @@
 #  I claim that each atom contains one or zero object creation.
 
 
-class Atoms:
+class ConstructorAtoms:
     # later, when we teach the code to make a differ between * as a multiplication and * as a pointer 
     # here will be a '*' special character
     __special_characters = frozenset((',', '+', '-', '+=', '-=', '<<', '>>', '/', '/=', '*='))
@@ -14,6 +14,7 @@ class Atoms:
 
     def __init__(self, codeline : str) -> None:
         self.__atoms = self.__GenerateAtoms(codeline.replace('{', '').replace('}', '').replace(';', ''))
+        print(*self.__atoms, sep='\n')
 
 
     def __GenerateAtoms(self, codeline : str) -> list:
