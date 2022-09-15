@@ -9,14 +9,14 @@ def RemoveScope(line : str) -> str:
     while pos > -1 and line[pos] not in (' ', '\n', '\t', '(', '[', '{'):
         pos -= 1
     return RemoveScope(line[:pos + 1] + line[original + 2:])
-
+            
 
 class Codelines:
     def __init__(self, dir : str) -> None:
-        self.__lines = []
+        self.lines = []
         for file in os.listdir(dir):
             with open(dir + '/' + file, "r") as f:
-                self.__lines += [RemoveScope(line) for line in f.readlines() if line[0] != '#']
+                self.lines += [RemoveScope(line) for line in f.readlines() if line[0] != '#']
 
 
     class Iterator:
@@ -39,4 +39,4 @@ class Codelines:
 
 
     def Begin(self) -> Iterator:
-        return self.Iterator(self.__lines, len(self.__lines), 0)
+        return self.Iterator(self.lines, len(self.lines), 0)
