@@ -50,7 +50,6 @@ class ClassList:
         self.__classes.sort(key = lambda x: (-1 * len(x), x))
         self.__constructors = CountConstructors(self.__codelines)
         self.__codelines = CodelinesWithoutDeclarations(self.__codelines)
-        print(*self.__codelines.lines)
 
 
     # returns a dict where key = name of class, value = list of three integers --
@@ -70,7 +69,6 @@ class ClassList:
                             res[objclass][0] += 1
                         elif method == Method.STACK:
                             res[objclass][1] += 1
-                            print(line.Code())
                         else:
                             res[objclass][2] += 1
                     atom.Next()
