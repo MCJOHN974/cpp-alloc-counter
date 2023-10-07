@@ -21,6 +21,8 @@ C       1       1       0
 AAA     1       0       1
 ```
 
+bebera
+
 ## Testing
 To test it run 
 ```
@@ -28,3 +30,5 @@ python3 src/test.py
 ```
 
 testtesttest
+
+merge
